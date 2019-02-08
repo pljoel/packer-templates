@@ -1,0 +1,54 @@
+{
+  "builders": [
+    {
+      "type": "vsphere-iso",
+      "convert_to_template": "true",
+
+      "vcenter_server":      "192.168.0.11",
+      "username":            "",
+      "password":            "",
+      "insecure_connection": "true",
+
+      "vm_name": "WS2019",
+      "host":     "192.168.0.10",
+
+      "guest_os_type": "windows9Server64Guest",
+
+      "communicator": "winrm",
+      "winrm_username": "Administrator",
+      "winrm_password": "packer123!",
+
+      "CPUs":             1,
+      "RAM":              4096,
+      "RAM_reserve_all": true,
+
+      "disk_controller_type":  "pvscsi",
+      "disk_size":        32768,
+      "disk_thin_provisioned": true,
+
+      "network_card": "vmxnet3",
+      "datastore": "SSHD-2TB",
+      "network": "VM Network",
+
+      "iso_paths": [
+        "[SSHD-2TB] ISOs/en_windows_server_2019_X2B2N-72CKG-FJ2YP-XW9Q6-HFVYD.iso",
+        "[SSHD-2TB] ISOs/VMware-Tools-10.3.5/vmtools/windows.iso"
+      ],
+
+      "floppy_files": [
+        "{{template_dir}}/setup/"
+      ],
+      "floppy_img_path": "[SSHD-2TB] ISOs/VMware-Tools-10.3.5/floppies/pvscsi-Windows8.flp"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "powershell",
+      "inline": [
+        "dir c:\\"
+      ]
+    }
+  ]
+}
+

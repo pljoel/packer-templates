@@ -25,7 +25,7 @@
                             <Active>true</Active>
                             <Extend>false</Extend>
                             <Format>NTFS</Format>
-                            <Label>Windows 7 Pro</Label>
+                            <Label>Windows server 2008 R2</Label>
                             <Letter>C</Letter>
                             <Order>1</Order>
                             <PartitionID>1</PartitionID>
@@ -43,20 +43,19 @@
                 <OSImage>
                     <InstallFrom>
                         <MetaData wcm:action="add">
-                            <Key>/IMAGE/NAME</Key>
-                            <Value>Windows 7 Professional</Value>
+                            <Key>/IMAGE/INDEX</Key>
+                            <Value>3</Value>
                         </MetaData>
                     </InstallFrom>
                     <InstallTo>
                         <DiskID>0</DiskID>
                         <PartitionID>1</PartitionID>
                     </InstallTo>
-                    <WillShowUI>OnError</WillShowUI>
                 </OSImage>
             </ImageInstall>
             <UserData>
                 <ProductKey>
-                    <Key>FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4</Key>
+                    <Key>489J6-VHDMP-X63PK-3K798-CPX3Y</Key>
                     <WillShowUI>OnError</WillShowUI>
                 </ProductKey>
                 <AcceptEula>true</AcceptEula>
@@ -99,15 +98,15 @@
         <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
             <RunSynchronous>
                 <RunSynchronousCommand wcm:action="add">
+                    <Path>a:\vmtools.cmd</Path>
                     <WillReboot>Always</WillReboot>
-                    <Order>1</Order>
-                    <Path>C:\Windows\System32\cmd.exe /c echo Rebooting..</Path>
-                    <Description>Reboot for pending updates</Description>
+                    <Order>2</Order>
+                    <Description>Install VMware Tools from windows.iso</Description>
                 </RunSynchronousCommand>
                 <RunSynchronousCommand wcm:action="add">
-                    <Description>Install VMware Tools from windows.iso</Description>
-                    <Path>a:\vmtools.cmd</Path>
-                    <Order>2</Order>
+                    <Path>C:\Windows\System32\cmd.exe /c echo Rebooting..</Path>
+                    <Order>1</Order>
+                    <Description>Reboot for pending updates</Description>
                     <WillReboot>Always</WillReboot>
                 </RunSynchronousCommand>
             </RunSynchronous>
@@ -130,10 +129,10 @@
                 <Username>Administrator</Username>
             </AutoLogon>
             <OOBE>
-                <SkipMachineOOBE>true</SkipMachineOOBE>
-                <SkipUserOOBE>true</SkipUserOOBE>
                 <HideEULAPage>true</HideEULAPage>
                 <ProtectYourPC>3</ProtectYourPC>
+                <SkipMachineOOBE>true</SkipMachineOOBE>
+                <SkipUserOOBE>true</SkipUserOOBE>
             </OOBE>
             <UserAccounts>
                 <AdministratorPassword>
@@ -143,8 +142,8 @@
             </UserAccounts>
             <FirstLogonCommands>
                 <SynchronousCommand wcm:action="add">
-                    <Description>Disable the network discovery prompt window</Description>
                     <CommandLine>reg add HKLM\System\CurrentControlSet\Control\Network\NewNetworkWindowOff</CommandLine>
+                    <Description>Disable the network discovery prompt window</Description>
                     <Order>1</Order>
                     <RequiresUserInput>true</RequiresUserInput>
                 </SynchronousCommand>
@@ -158,5 +157,5 @@
             <TimeZone>Eastern Standard Time</TimeZone>
         </component>
     </settings>
-    <cpi:offlineImage cpi:source="wim:c:/users/joel/documents/deployment/windows7-sp1.wim#Windows 7 PROFESSIONAL" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
+    <cpi:offlineImage cpi:source="wim:c:/users/joel/documents/deployment/w2008r2_standard-trial_x64.wim#Windows Server 2008 R2 SERVERENTERPRISE" xmlns:cpi="urn:schemas-microsoft-com:cpi" />
 </unattend>

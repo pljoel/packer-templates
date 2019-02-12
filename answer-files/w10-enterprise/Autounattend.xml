@@ -8,7 +8,6 @@
             <InputLocale>en-US</InputLocale>
             <SystemLocale>en-US</SystemLocale>
             <UILanguage>en-US</UILanguage>
-            <UILanguageFallback>en-US</UILanguageFallback>
             <UserLocale>en-US</UserLocale>
         </component>
         <component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -42,24 +41,24 @@
             </DynamicUpdate>
             <ImageInstall>
                 <OSImage>
-					<!-- Windows 10 version, either use /IMAGE/INDEX or /IMAGE/NAME with proper information given by cmd:
-					     dism /get-wiminfo /wimfile:Windows10_Ent-Trial_x64.wim
-					<InstallFrom>
+                    <!-- Windows 10 version, either use /IMAGE/INDEX or /IMAGE/NAME with proper information given by cmd:
+                         dism /get-wiminfo /wimfile:Windows10_Ent-Trial_x64.wim
+                    <InstallFrom>
                         <MetaData wcm:action="add">
                             <Key>/IMAGE/INDEX</Key>
                             <Value>1</Value>
                         </MetaData>
                     </InstallFrom>
-					-->
+                    -->
                     <InstallTo>
                         <DiskID>0</DiskID>
                         <PartitionID>1</PartitionID>
                     </InstallTo>
                 </OSImage>
             </ImageInstall>
-			<UserData>
+            <UserData>
                 <AcceptEula>true</AcceptEula>
-				<!-- Product key or KMS Client Setup Key: https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys
+                <!-- Product key or KMS Client Setup Key: https://docs.microsoft.com/en-us/windows-server/get-started/kmsclientkeys
                 <ProductKey>
                     <Key>XXXXX-XXXXX-XXXXX-XXXXX-XXXXX</Key>
                 </ProductKey>
@@ -100,7 +99,6 @@
             <InputLocale>en-US</InputLocale>
             <SystemLocale>en-US</SystemLocale>
             <UILanguage>en-US</UILanguage>
-            <UILanguageFallback>en-US</UILanguageFallback>
             <UserLocale>en-US</UserLocale>
         </component>
         <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
@@ -119,7 +117,6 @@
             <InputLocale>en-US</InputLocale>
             <SystemLocale>en-US</SystemLocale>
             <UILanguage>en-US</UILanguage>
-            <UILanguageFallback>en-US</UILanguageFallback>
             <UserLocale>en-US</UserLocale>
         </component>
         <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">

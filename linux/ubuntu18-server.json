@@ -17,7 +17,7 @@
       "insecure_connection": "true",
 	  "datacenter":          "Homelab",
 
-      "vm_name":    "Ubuntu18",
+      "vm_name":    "Ubuntu18-Server",
 	  "datastore":  "SSHD-2TB",
       "host":       "192.168.0.10",
 	  "folder":     "Templates",

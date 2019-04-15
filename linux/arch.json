@@ -1,0 +1,72 @@
+{
+  
+  "variables": {
+    "vsphere_user": "{{ env `vsphere_user`}}",
+	"vsphere_pass": "{{ env `vsphere_pass`}}"
+  },
+
+  
+  "builders": [
+    {
+      "type": "vsphere-iso",
+      "convert_to_template": "true",
+
+      "vcenter_server":      "192.168.0.11",
+      "username":            "{{user `vsphere_user`}}",
+      "password":            "{{user `vsphere_pass`}}",
+      "insecure_connection": "true",
+	  "datacenter":          "Homelab",
+
+      "vm_name":    "Arch",
+	  "datastore":  "SSHD-2TB",
+      "host":       "192.168.0.10",
+	  "folder":     "Templates",
+
+      "guest_os_type":  "other4xLinux64Guest",
+      "firmware":       "efi",
+
+      "communicator": "ssh",
+      "ssh_username": "root",
+      "ssh_password": "packer123!",
+
+      "CPUs":            1,
+      "RAM":             4096,
+      "RAM_reserve_all": true,
+
+      "disk_controller_type":  "pvscsi",
+      "disk_size":             32768,
+      "disk_thin_provisioned": true,
+
+      "network_card": "vmxnet3",
+      "network":      "VM Network",
+
+      "iso_paths": [
+        "[SSHD-2TB] ISOs/archlinux-2019.04.01-x86_64.iso"
+      ],
+
+      "floppy_files": [
+		"{{template_dir}}/answer-files/arch/install-arch.sh"
+      ],
+      
+      "boot_command": [
+        "<enter><wait10><wait10><wait10><wait10>",
+        "mkdir /mnt/install/ && mount /dev/fd0 /mnt/install/",
+        "<enter>",
+        "chmod +x /mnt/install/install-arch.sh",
+        "<enter>",
+        "cd /mnt/install && ./install-arch.sh",
+        "<enter>"
+      ],
+      "boot_wait": "10s"
+    }
+  ],
+
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "ls /"
+      ]
+    }
+  ]
+}

@@ -44,7 +44,7 @@
       ],
 
       "floppy_files": [
-        "{{template_dir}}/ks.cfg/"
+        "{{template_dir}}/ks.cfg"
       ],
       
       "boot_command": [

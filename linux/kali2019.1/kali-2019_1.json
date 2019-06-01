@@ -2,7 +2,7 @@
   
   "variables": {
     "vsphere_user": "{{ env `vsphere_user`}}",
-	"vsphere_pass": "{{ env `vsphere_pass`}}"
+    "vsphere_pass": "{{ env `vsphere_pass`}}"
   },
 
   
@@ -15,14 +15,14 @@
       "username":            "{{user `vsphere_user`}}",
       "password":            "{{user `vsphere_pass`}}",
       "insecure_connection": "true",
-	  "datacenter":          "Homelab",
+      "datacenter":          "Homelab",
 
-      "vm_name":    "Ubuntu18-Server",
-	  "datastore":  "SSHD-2TB",
+      "vm_name":    "Kali-2019.1",
+      "datastore":  "SSHD-2TB",
       "host":       "192.168.0.10",
-	  "folder":     "Templates",
+      "folder":     "Templates",
 
-      "guest_os_type":  "ubuntu64Guest",
+      "guest_os_type":  "debian9_64Guest",
 
       "communicator": "ssh",
       "ssh_username": "root",
@@ -40,29 +40,21 @@
       "network":      "VM Network",
 
       "iso_paths": [
-        "[SSHD-2TB] ISOs/ubuntu-18.04.2-server-amd64.iso"
-      ],
-
-      "floppy_files": [
-		"{{template_dir}}/answer-files/ubuntu18-server/preseed.cfg"
+        "[SSHD-2TB] ISOs/kali-linux-2019.1-amd64.iso"
       ],
       
+      "http_directory": "{{template_dir}}/",
+      "http_ip": "192.168.0.101",
+      
       "boot_command": [
-        "<enter><wait><f6><wait><esc><wait>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-        "<bs><bs><bs>",
+        "<esc><wait>",
         "/install/vmlinuz",
         " initrd=/install/initrd.gz",
-        " priority=critical",
-        " locale=en_US.UTF-8",
-        " file=/media/preseed.cfg",
+        " hostname=kali",
+        " auto=true",
+        " interface=auto",
+        " domain=''",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg",
         "<enter>"
       ],
       "boot_wait": "10s"

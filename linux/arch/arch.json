@@ -2,7 +2,7 @@
   
   "variables": {
     "vsphere_user": "{{ env `vsphere_user`}}",
-	"vsphere_pass": "{{ env `vsphere_pass`}}"
+    "vsphere_pass": "{{ env `vsphere_pass`}}"
   },
 
   
@@ -15,12 +15,12 @@
       "username":            "{{user `vsphere_user`}}",
       "password":            "{{user `vsphere_pass`}}",
       "insecure_connection": "true",
-	  "datacenter":          "Homelab",
+      "datacenter":          "Homelab",
 
       "vm_name":    "Arch",
-	  "datastore":  "SSHD-2TB",
+      "datastore":  "SSHD-2TB",
       "host":       "192.168.0.10",
-	  "folder":     "Templates",
+      "folder":     "Templates",
 
       "guest_os_type":  "other4xLinux64Guest",
       "firmware":       "efi",
@@ -45,7 +45,7 @@
       ],
 
       "floppy_files": [
-		"{{template_dir}}/answer-files/arch/install-arch.sh"
+        "{{template_dir}}/install-arch.sh"
       ],
       
       "boot_command": [

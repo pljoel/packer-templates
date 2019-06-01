@@ -39,8 +39,11 @@ pacstrap /mnt base open-vm-tools intel-ucode openssh #base-devel
 genfstab -t PARTUUID /mnt >> /mnt/etc/fstab
 echo "arch" > /mnt/etc/hostname
 ln -sf /mnt/usr/share/zoneinfo/America/Toronto /mnt/etc/localtime
+sed -i -e 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /mnt/etc/locale.gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 # Wrap commands inside of "arch-chroot" that needs to be run inside the context
+arch-chroot /mnt locale-gen
 arch-chroot /mnt usermod --password $(openssl passwd -1 packer123!) root
 arch-chroot /mnt systemctl enable vmtoolsd.service
 arch-chroot /mnt systemctl enable vmware-vmblock-fuse.service

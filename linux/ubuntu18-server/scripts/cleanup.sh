@@ -9,14 +9,14 @@ apt-get autoremove
 # Synchronize the package index files
 apt-get update
 
-# Stop services for cleanup
+# Stop log services for cleanup
 systemctl stop syslog.socket
 systemctl stop rsyslog.service
 
 # Clean SSH keys
 rm -f /etc/ssh/*key*
 
-# Clean temporary dirs and /var/log
+# Clean temporary dirs and logs
 rm -Rf /tmp/*
 rm -Rf /var/tmp/*
 find /var/log -type f -exec truncate --size=0 {} \;
@@ -37,6 +37,6 @@ hostnamectl set-hostname ""
 cat /dev/null > /etc/machine-id
 rm -f /var/lib/dbus/machine-id
 
-# Cleanup shell history
+# Clean shell history
 history -w
 history -c

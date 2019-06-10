@@ -1,0 +1,66 @@
+{
+  
+    "variables": {
+      "vsphere_user": "{{ env `vsphere_user`}}",
+      "vsphere_pass": "{{ env `vsphere_pass`}}"
+    },
+  
+    
+    "builders": [
+      {
+        "type": "vsphere-iso",
+        "convert_to_template": "true",
+  
+        "vcenter_server":      "192.168.0.11",
+        "username":            "{{user `vsphere_user`}}",
+        "password":            "{{user `vsphere_pass`}}",
+        "insecure_connection": "true",
+        "datacenter":          "Homelab",
+  
+        "vm_name":    "RHEL8",
+        "datastore":  "SSHD-2TB",
+        "host":       "192.168.0.10",
+        "folder":     "Templates",
+  
+        "guest_os_type":  "rhel8_64Guest",
+  
+        "communicator": "ssh",
+        "ssh_username": "root",
+        "ssh_password": "packer123!",
+  
+        "CPUs":            1,
+        "RAM":             4096,
+        "RAM_reserve_all": true,
+  
+        "disk_controller_type":  "pvscsi",
+        "disk_size":             32768,
+        "disk_thin_provisioned": true,
+  
+        "network_card": "vmxnet3",
+        "network":      "VM Network",
+  
+        "iso_paths": [
+          "[SSHD-2TB] ISOs/rhel-8.0-x86_64-dvd.iso"
+        ],
+  
+        "floppy_files": [
+          "{{template_dir}}/ks.cfg"
+        ],
+        
+        "boot_command": [
+          "<tab> text ks=hd:fd0:/ks.cfg<enter><wait>"
+        ],
+        "boot_wait": "10s"
+      }
+    ],
+  
+    "provisioners": [
+      {
+        "type": "shell",
+        "scripts": [
+          "scripts/cleanup.sh"
+        ]
+      }
+    ]
+  }
+  

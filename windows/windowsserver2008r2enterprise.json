@@ -6,21 +6,21 @@
   },
 
   
-  "builders": [
-    {
+  "builders": [{
+      "name": "ws2008",
       "type": "vsphere-iso",
       "convert_to_template": "true",
 
-      "vcenter_server":      "192.168.0.11",
+      "vcenter_server":      "172.31.162.18",
       "username":            "{{user `vsphere_user`}}",
       "password":            "{{user `vsphere_pass`}}",
       "insecure_connection": "true",
-	  "datacenter":          "Homelab",
+          "datacenter":          "TO-Lab",
 
       "vm_name":    "WS2008R2-Enterprise",
-	  "datastore":  "SSHD-2TB",
-      "host":       "192.168.0.10",
-	  "folder":     "Templates",
+          "datastore":  "Datastore-TO-CL01-01",
+      "cluster":       "Cluster01",
+          "folder":     "ITS-ENG-Hosting/ITS-ENG-Security/SecDev/Templates/Jenkins",
 
       "guest_os_type":  "windows7Server64Guest",
 
@@ -32,23 +32,23 @@
       "RAM":             4096,
       "RAM_reserve_all": true,
 
-      "disk_controller_type":  "pvscsi",
+	"disk_controller_type": "pvscsi",
       "disk_size":             32768,
       "disk_thin_provisioned": true,
 
       "network_card": "vmxnet3",
-      "network":      "VM Network",
+      "network":      "SEC-DEV-Testing",
 
       "iso_paths": [
-        "[SSHD-2TB] ISOs/w2008r2_standard-Trial_x64.iso",
-        "[SSHD-2TB] ISOs/VMware-Tools-10.2.5/vmtools/windows.iso"
+        "[Datastore-TO-CL01-01] ISO/en_windows_server_2008_r2_with_sp1_vl_build_x64_dvd_617403.iso",
+        "[Datastore-TO-CL01-01] ISO/secdev/VMware-Tools-10.3.10/vmtools/windows.iso"
       ],
-
+	
       "floppy_files": [
         "{{template_dir}}/setup/",
-		"{{template_dir}}/answer-files/ws2008r2-enterprise/"
+                "{{template_dir}}/answer-files/ws2008r2-enterprise/"
       ],
-      "floppy_img_path": "[SSHD-2TB] ISOs/VMware-Tools-10.2.5/floppies/pvscsi-WindowsVista.flp"
+      "floppy_img_path": "[Datastore-TO-CL01-01] ISO/secdev/VMware-Tools-10.3.10/floppies/pvscsi-Windows2008.flp"
     }
   ],
 

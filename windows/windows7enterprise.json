@@ -1,7 +1,7 @@
 {
   
   "variables": {
-    "vsphere_user": "{{ env `vsphere_user`}}",
+	"vsphere_user": "{{ env `vsphere_user`}}",
 	"vsphere_pass": "{{ env `vsphere_pass`}}"
   },
 
@@ -11,23 +11,22 @@
       "type": "vsphere-iso",
       "convert_to_template": "true",
 
-      "vcenter_server":      "192.168.0.11",
+      "vcenter_server":      "172.31.162.18",
       "username":            "{{user `vsphere_user`}}",
       "password":            "{{user `vsphere_pass`}}",
       "insecure_connection": "true",
-	  "datacenter":          "Homelab",
+	  "datacenter":          "TO-Lab",
 
       "vm_name":    "W7-Enterprise",
-	  "datastore":  "SSHD-2TB",
-      "host":       "192.168.0.10",
-	  "folder":     "Templates",
+      "cluster": "Cluster01",
+	  "datastore":  "Datastore-TO-CL01-01",
+	  "folder":     "ITS-ENG-Hosting/ITS-ENG-Security/SecDev/Templates/Jenkins",
 
       "guest_os_type":  "windows7_64Guest",
 
       "communicator":   "winrm",
       "winrm_username": "Administrator",
       "winrm_password": "packer123!",
-
       "CPUs":            1,
       "RAM":             4096,
       "RAM_reserve_all": true,
@@ -37,18 +36,18 @@
       "disk_thin_provisioned": true,
 
       "network_card": "vmxnet3",
-      "network":      "VM Network",
+      "network":      "SEC-DEV-Testing",
 
       "iso_paths": [
-        "[SSHD-2TB] ISOs/Windows 7 Enterprise SP1 ENG.iso",
-        "[SSHD-2TB] ISOs/VMware-Tools-10.2.5/vmtools/windows.iso"
+        "[Datastore-TO-CL01-01] ISO/en_windows_7_enterprise_with_sp1_x64_dvd_u_677651.iso",
+        "[Datastore-TO-CL01-01] ISO/secdev/VMware-Tools-10.3.10/vmtools/windows.iso"
       ],
 
       "floppy_files": [
         "{{template_dir}}/setup/",
-		"{{template_dir}}/answer-files/w7-enterprise/"
+	"{{template_dir}}/answer-files/w7-enterprise/"
       ],
-      "floppy_img_path": "[SSHD-2TB] ISOs/VMware-Tools-10.2.5/floppies/pvscsi-WindowsVista.flp"
+      "floppy_img_path": "[Datastore-TO-CL01-01] ISO/secdev/VMware-Tools-10.3.10/floppies/pvscsi-WindowsVista.flp"
     }
   ],
 
@@ -56,7 +55,8 @@
     {
       "type": "powershell",
       "inline": [
-        "dir c:\\"
+        "powercfg /x -monitor-timeout-ac 0",
+	"powercfg /x -standby-timeout-ac 0"
       ]
     }
   ]

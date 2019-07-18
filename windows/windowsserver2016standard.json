@@ -7,21 +7,21 @@
 
   
   "builders": [
-    {
+{
       "type": "vsphere-iso",
+      "name": "ws2016",
       "convert_to_template": "true",
 
-      "vcenter_server":      "192.168.0.11",
+      "vcenter_server":      "172.31.162.18",
       "username":            "{{user `vsphere_user`}}",
       "password":            "{{user `vsphere_pass`}}",
       "insecure_connection": "true",
-	  "datacenter":          "Homelab",
+          "datacenter":          "TO-Lab",
 
-      "vm_name":    "WS2016",
-	  "datastore":  "SSHD-2TB",
-      "host":       "192.168.0.10",
-	  "folder":     "Templates",
-
+      "vm_name":    "WS2016-Standard",
+          "datastore":  "Datastore-TO-CL01-01",
+          "folder":     "ITS-ENG-Hosting/ITS-ENG-Security/SecDev/Templates/Jenkins",
+        "cluster": "Cluster01",
       "guest_os_type":  "windows9Server64Guest",
 
       "communicator":   "winrm",
@@ -37,26 +37,27 @@
       "disk_thin_provisioned": true,
 
       "network_card": "vmxnet3",
-      "network":      "VM Network",
+      "network":      "SEC-DEV-Testing",
 
       "iso_paths": [
-        "[SSHD-2TB] ISOs/w2016_standard64.iso",
-        "[SSHD-2TB] ISOs/VMware-Tools-10.3.5/vmtools/windows.iso"
+        "[Datastore-TO-CL01-01] ISO/en_windows_server_2016_x64_dvd_9327751.iso",
+        "[Datastore-TO-CL01-01] ISO/secdev/VMware-Tools-10.3.10/vmtools/windows.iso"
       ],
 
       "floppy_files": [
         "{{template_dir}}/setup/",
-		"{{template_dir}}/answer-files/ws2016/"
+                "{{template_dir}}/answer-files/ws2016/"
       ],
-      "floppy_img_path": "[SSHD-2TB] ISOs/VMware-Tools-10.3.5/floppies/pvscsi-Windows8.flp"
+      "floppy_img_path": "[Datastore-TO-CL01-01] ISO/secdev/VMware-Tools-10.3.10/floppies/pvscsi-Windows8.flp"
     }
-  ],
+ ],
 
   "provisioners": [
     {
       "type": "powershell",
       "inline": [
-        "dir c:\\"
+        "powercfg /x -monitor-timeout-ac 0",
+        "powercfg /x -standby-timeout-ac 0"
       ]
     }
   ]
